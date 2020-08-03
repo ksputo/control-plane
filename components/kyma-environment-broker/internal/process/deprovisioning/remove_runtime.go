@@ -55,7 +55,7 @@ func (s *RemoveRuntimeStep) Run(operation internal.DeprovisioningOperation, log 
 	if instance.RuntimeID == "" {
 		log.Warn("Runtime not exist")
 		operation.ProvisionerOperationID = "NEVER_CREATED"
-		return operation, 0, nil
+		return operation, 1*time.Second, nil
 	}
 	log = log.WithField("runtimeID", instance.RuntimeID)
 
