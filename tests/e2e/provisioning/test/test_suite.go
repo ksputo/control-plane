@@ -10,8 +10,8 @@ import (
 
 	"github.com/google/uuid"
 
-	"github.com/kyma-project/control-plane/tests/e2e/provisioning/internal/director"
-	"github.com/kyma-project/control-plane/tests/e2e/provisioning/internal/director/oauth"
+	"github.com/kyma-project/control-plane/components/kyma-environment-broker/common/director"
+	"github.com/kyma-project/control-plane/components/kyma-environment-broker/common/director/oauth"
 	"github.com/kyma-project/control-plane/tests/e2e/provisioning/internal/gardener"
 	"github.com/kyma-project/control-plane/tests/e2e/provisioning/internal/hyperscaler"
 	"github.com/kyma-project/control-plane/tests/e2e/provisioning/internal/hyperscaler/azure"
@@ -133,7 +133,6 @@ func newTestSuite(t *testing.T) *Suite {
 
 	// create director client on the base of graphQL client and OAuth client
 	graphQLClient := gcli.NewClient(cfg.Director.URL, gcli.WithHTTPClient(httpClient))
-	graphQLClient.Log = func(s string) { log.Println(s) }
 
 	oauthClient := oauth.NewOauthClient(httpClient, cli, cfg.Director.OauthCredentialsSecretName, cfg.Director.Namespace)
 	err = oauthClient.WaitForCredentials()
@@ -142,7 +141,7 @@ func newTestSuite(t *testing.T) *Suite {
 	}
 
 	brokerClient := broker.NewClient(ctx, cfg.Broker, cfg.TenantID, instanceID, subAccountID, oAuth2Config, log.WithField("service", "broker_client"))
-
+	
 	directorClient := director.NewDirectorClient(oauthClient, graphQLClient, log.WithField("service", "director_client"))
 
 	runtimeClient := runtime.NewClient(cfg.ProvisionerURL, cfg.TenantID, instanceID, *httpClient, directorClient, log.WithField("service", "runtime_client"))
