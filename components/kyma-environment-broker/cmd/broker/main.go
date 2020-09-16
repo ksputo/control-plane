@@ -20,8 +20,6 @@ import (
 	"k8s.io/client-go/rest"
 	"sigs.k8s.io/controller-runtime/pkg/client/apiutil"
 
-	"github.com/kyma-project/control-plane/components/kyma-environment-broker/common/director"
-	"github.com/kyma-project/control-plane/components/kyma-environment-broker/common/director/oauth"
 	"github.com/kyma-project/control-plane/components/kyma-environment-broker/internal/appinfo"
 	"github.com/kyma-project/control-plane/components/kyma-environment-broker/internal/auditlog"
 	"github.com/kyma-project/control-plane/components/kyma-environment-broker/internal/avs"
@@ -45,6 +43,8 @@ import (
 	"github.com/kyma-project/control-plane/components/kyma-environment-broker/internal/runtime"
 	"github.com/kyma-project/control-plane/components/kyma-environment-broker/internal/storage"
 	"github.com/kyma-project/control-plane/components/kyma-environment-broker/internal/storage/dbsession/dbmodel"
+	"github.com/kyma-project/control-plane/components/kyma-environment-broker/common/director"
+	"github.com/kyma-project/control-plane/components/kyma-environment-broker/common/director/oauth"
 
 	"code.cloudfoundry.org/lager"
 	"github.com/dlmiddlecote/sqlstats"
